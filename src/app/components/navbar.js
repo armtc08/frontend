@@ -21,32 +21,50 @@ export default function Navbar() {
         <div className="flex" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active"s href={'/'}>
+              <Link className="nav-link active" s href={"/"}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" href={'/about'}>
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                href={"/about"}
+              >
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" href={"/service"}>
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                href={"/service"}
+              >
                 Service
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" href={'./contact'}>
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                href={"./contact"}
+              >
                 Contact
               </Link>
             </li>
           </ul>
+          <Link href={'/signin'}>
             <button className="btn btn-outline-primary" type="submit">
               SignIn
             </button>
-            <Link className="btn btn-outline-success" type="submit" href={'./signup'}>
-              SignUp
-            </Link>
+          </Link>
+          <Link
+            className="btn btn-outline-success"
+            type="submit"
+            href={"./signup"}
+          >
+            SignUp
+          </Link>
         </div>
       </div>
     </nav>

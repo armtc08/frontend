@@ -1,12 +1,21 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Page() {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const [Token, setToken] = useState("");
   const router = useRouter();
+
+  // ตรวจสอบ token ใน localStorage โดยใช้ useEffect
+  useEffect(() => {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+      router.push('/users');
+    }
+  }, [router]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,10 +33,14 @@ export default function Page() {
     });
 
     const result = await res.json();
-    setToken(result.token);
+    if (result.token) {
+      setToken(result.token);
+      localStorage.setItem('token', result.token);
+      router.push('/users');
+    } else {
+      console.log('No token received, stay on SignIn page');
+    }
   };
-
-  // ลบการเช็ค token ที่เกิดทันทีเมื่อโหลด component
 
   return (
     <form className="row g-3" onSubmit={handleSubmit}>

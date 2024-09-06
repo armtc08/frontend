@@ -9,21 +9,22 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  //const handleLogout = () => {
+  const handleLogout = () => {
     // Remove token from localStorage
-    //localStorage.removeItem('token');
-    //setIsLoggedIn(false);
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
     // Redirect to the home page
-    //router.push('/signin');
-  //};
+    router.push('/signin');
+  };
 
   useEffect(() => {
-    // Check for token in localStorage
+    // Check for token in localStorage on mount
     const token = localStorage.getItem('token');
     if (token) {
       setIsLoggedIn(true);
     } else {
-      router.push('/signin');
+      // Do not automatically redirect, just set isLoggedIn to false
+      setIsLoggedIn(false);
     }
 
     // Add event listener for storage changes
@@ -60,7 +61,7 @@ export default function Navbar() {
         <div className="flex" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link active" s href={"/"}>
+              <Link className="nav-link active" href={"/"}>
                 Home
               </Link>
             </li>
@@ -86,7 +87,7 @@ export default function Navbar() {
               <Link
                 className="nav-link active"
                 aria-current="page"
-                href={"./contact"}
+                href={"/contact"}
               >
                 Contact
               </Link>
@@ -112,7 +113,6 @@ export default function Navbar() {
               </>
             )}
           </form>
-          
         </div>
       </div>
     </nav>

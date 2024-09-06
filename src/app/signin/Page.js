@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react";
 export default function Page() {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
-  const [Token, setToken] = useState("");
+  const [token, setToken] = useState("");
   const router = useRouter();
 
   // ตรวจสอบ token ใน localStorage โดยใช้ useEffect
@@ -13,7 +13,7 @@ export default function Page() {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
-      router.push('/signin');
+      router.push('/users'); // Redirect to /users if token is present
     }
   }, [router]);
 
@@ -36,7 +36,7 @@ export default function Page() {
     if (result.token) {
       setToken(result.token);
       localStorage.setItem('token', result.token);
-      router.push('/users');
+      router.push('/users'); // Redirect to /users after successful login
     } else {
       console.log('No token received, stay on SignIn page');
     }

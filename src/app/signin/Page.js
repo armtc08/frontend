@@ -2,17 +2,17 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-export default function page() {
+export default function Page() {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const [Token, setToken] = useState("");
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("click success");
 
-    const res = await fetch("http://localhost:3001/api/login", {
+    const res = await fetch("https://backend-rho-mauve.vercel.app/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,27 +23,25 @@ export default function page() {
       })
     });
 
-    const result = await res.json()
-    setToken(result.token)
+    const result = await res.json();
+    setToken(result.token);
   };
 
-  if(Token){
+  if (Token) {
     try {
-        if(typeof window !== "undefined"){
-            localStorage.setItem('token', Token)
-            router.push('/users')
-        }
+      if (typeof window !== "undefined") {
+        localStorage.setItem('token', Token);
+        router.push('/users');
+      }
     } catch (error) {
-        console.log('Error while setting token localstoreg', error)
+      console.log('Error while setting token localstorage', error);
     }
   }
-
-
 
   return (
     <form className="row g-3" onSubmit={handleSubmit}>
       <div className="col-md-6">
-        <label for="basic-url" className="form-label">
+        <label htmlFor="basic-url" className="form-label">
           Username
         </label>
         <div className="input-group">
@@ -60,7 +58,7 @@ export default function page() {
         </div>
       </div>
       <div className="col-md-6">
-        <label for="basic-url" className="form-label">
+        <label htmlFor="basic-url" className="form-label">
           Password
         </label>
         <div className="input-group">
@@ -78,7 +76,7 @@ export default function page() {
       </div>
       <div className="col-12">
         <button type="submit" className="btn btn-success">
-          <i class="bi bi-box-arrow-right"></i> Sign In
+          <i className="bi bi-box-arrow-right"></i> Sign In
         </button>
       </div>
     </form>

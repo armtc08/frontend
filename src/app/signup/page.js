@@ -11,7 +11,7 @@ export default function Page() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch('http://localhost:3001/api/users', {
+    const res = await fetch('https://backend-rho-mauve.vercel.app/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

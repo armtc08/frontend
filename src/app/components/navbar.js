@@ -1,6 +1,45 @@
+"use client";
 import Link from "next/link";
+import { useEffect, useState } from 'react';
+import BootstrapClient from './BootstrapClient';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Remove token from localStorage
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+    // Redirect to the home page
+    router.push('/signin');
+  };
+
+  useEffect(() => {
+    // Check for token in localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      router.push('/signin');
+    }
+
+    // Add event listener for storage changes
+    const handleStorageChange = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [router]);
+
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -53,18 +92,27 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
-          <Link href={'/signin'}>
-            <button className="btn btn-outline-primary" type="submit">
-              SignIn
-            </button>
-          </Link>
-          <Link
-            className="btn btn-outline-success"
-            type="submit"
-            href={"./signup"}
-          >
-            SignUp
-          </Link>
+          <form className="d-flex">
+            {isLoggedIn ? (
+              <button type="button" className="btn btn-outline-danger me-2" onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <>
+                <Link href="/signup">
+                  <button type="button" className="btn btn-outline-success me-2">
+                    Sign Up
+                  </button>
+                </Link>
+                <Link href="/signin">
+                  <button type="button" className="btn btn-outline-success">
+                    Sign In
+                  </button>
+                </Link>
+              </>
+            )}
+          </form>
+          
         </div>
       </div>
     </nav>

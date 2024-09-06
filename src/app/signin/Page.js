@@ -13,7 +13,7 @@ export default function Page() {
     const storedToken = localStorage.getItem("token");
     if (storedToken) {
       setToken(storedToken);
-      router.push('/users');
+      router.push('/signin');
     }
   }, [router]);
 
@@ -36,7 +36,7 @@ export default function Page() {
     if (result.token) {
       setToken(result.token);
       localStorage.setItem('token', result.token);
-      router.push('/signin');
+      router.push('/users');
     } else {
       console.log('No token received, stay on SignIn page');
     }

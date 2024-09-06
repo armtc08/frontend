@@ -27,23 +27,21 @@ export default function Page() {
     setToken(result.token);
   };
 
-  if(Token){
+  if (Token) {
     try {
-        if(typeof window !== "undefined"){
-            localStorage.setItem('token', Token);
-            router.push('/users');
-        }
+      if (typeof window !== "undefined") {
+        localStorage.setItem('token', Token);
+        router.push('/users');
+      }
     } catch (error) {
-        console.log('Error while setting token localstoreg', error);
+      console.log('Error while setting token localstorage', error);
     }
   }
-
-
 
   return (
     <form className="row g-3" onSubmit={handleSubmit}>
       <div className="col-md-6">
-        <label for="basic-url" className="form-label">
+        <label htmlFor="basic-url" className="form-label">
           Username
         </label>
         <div className="input-group">
@@ -60,7 +58,7 @@ export default function Page() {
         </div>
       </div>
       <div className="col-md-6">
-        <label for="basic-url" className="form-label">
+        <label htmlFor="basic-url" className="form-label">
           Password
         </label>
         <div className="input-group">
@@ -78,7 +76,7 @@ export default function Page() {
       </div>
       <div className="col-12">
         <button type="submit" className="btn btn-success">
-          <i class="bi bi-box-arrow-right"></i> Sign In
+          <i className="bi bi-box-arrow-right"></i> Sign In
         </button>
       </div>
     </form>

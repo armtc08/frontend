@@ -44,7 +44,7 @@ export default function Navbar() {
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          LEGO
+          9Arm.Shop
         </a>
         <button
           className="navbar-toggler"
@@ -79,7 +79,7 @@ export default function Navbar() {
                 aria-current="page"
                 href={"/service"}
               >
-                Service
+                Shop
               </Link>
             </li>
             <li className="nav-item">

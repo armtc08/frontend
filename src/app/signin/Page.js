@@ -12,7 +12,7 @@ export default function Page() {
     e.preventDefault();
     console.log("click success");
 
-    const res = await fetch("https://backend-rho-mauve.vercel.app", {
+    const res = await fetch("https://backend-rho-mauve.vercel.app/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

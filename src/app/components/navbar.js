@@ -106,7 +106,7 @@ export default function Navbar() {
                   </button>
                 </Link>
                 <Link href="/signin">
-                  <button type="button" className="btn btn-outline-cyan">
+                  <button type="button" className="btn btn-outline-cyan me-2">
                     Sign In
                   </button>
                 </Link>

@@ -36,7 +36,7 @@ export default function Page() {
     if (result.token) {
       setToken(result.token);
       localStorage.setItem('token', result.token);
-      router.push('/users');
+      router.push('/signin');
     } else {
       console.log('No token received, stay on SignIn page');
     }

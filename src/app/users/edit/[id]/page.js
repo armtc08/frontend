@@ -62,15 +62,14 @@ export default function Page({ params }) {
                             <div className="col-md-6">
                                 <label htmlFor="firstname" className="form-label">FirstName</label>
                                 <div className="input-group">
-                                    <span className="input-group-text" id="firstname-addon">
+                                    <span className="input-group-text">
                                         <i className="bi bi-person-vcard"></i>
                                     </span>
                                     <input
                                         type="text"
-                                        id="firstname"
                                         className="form-control"
                                         defaultValue={items[0]?.firstname}
-                                        onChange={(e) => setFirstName(e.target.value)}
+                                        onChange={(e) => setFirstName(e.target.value.toString())}
                                         required
                                     />
                                 </div>
@@ -78,15 +77,14 @@ export default function Page({ params }) {
                             <div className="col-md-6">
                                 <label htmlFor="lastname" className="form-label">LastName</label>
                                 <div className="input-group">
-                                    <span className="input-group-text" id="lastname-addon">
+                                    <span className="input-group-text">
                                         <i className="bi bi-person-vcard-fill"></i>
                                     </span>
                                     <input
                                         type="text"
-                                        id="lastname"
                                         className="form-control"
                                         defaultValue={items[0]?.lastname}
-                                        onChange={(e) => setLastName(e.target.value)}
+                                        onChange={(e) => setLastName(e.target.value.toString())}
                                         required
                                     />
                                 </div>
@@ -94,15 +92,14 @@ export default function Page({ params }) {
                             <div className="col-md-6">
                                 <label htmlFor="username" className="form-label">Username</label>
                                 <div className="input-group">
-                                    <span className="input-group-text" id="username-addon">
+                                    <span className="input-group-text">
                                         <i className="bi bi-person-vcard"></i>
                                     </span>
                                     <input
                                         type="text"
-                                        id="username"
                                         className="form-control"
                                         defaultValue={items[0]?.username}
-                                        onChange={(e) => setUserName(e.target.value)}
+                                        onChange={(e) => setUserName(e.target.value.toString())}
                                         required
                                     />
                                 </div>
@@ -110,15 +107,14 @@ export default function Page({ params }) {
                             <div className="col-md-6">
                                 <label htmlFor="password" className="form-label">Password</label>
                                 <div className="input-group">
-                                    <span className="input-group-text" id="password-addon">
+                                    <span className="input-group-text">
                                         <i className="bi bi-person-vcard-fill"></i>
                                     </span>
                                     <input
                                         type="password"
-                                        id="password"
                                         className="form-control"
                                         defaultValue={items[0]?.password}
-                                        onChange={(e) => setPassWord(e.target.value)}
+                                        onChange={(e) => setPassWord(e.target.value.toString())}
                                         required
                                     />
                                 </div>

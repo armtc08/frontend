@@ -42,7 +42,7 @@ export default function Page() {
     <form className="row g-3" onSubmit={handleSubmit}>
       <div className="col-md-6">
         <label htmlFor="basic-url" className="form-label">
-          Username
+          username
         </label>
         <div className="input-group">
           <span className="input-group-text" id="basic-addon3">

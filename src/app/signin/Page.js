@@ -1,12 +1,20 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Page() {
   const [username, setUserName] = useState("");
   const [password, setPassWord] = useState("");
   const [Token, setToken] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    // ตรวจสอบว่า token มีอยู่ใน localStorage หรือไม่ เมื่อโหลดหน้าเว็บ
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.push("/users"); // ถ้ามี token ให้เปลี่ยนหน้า
+    }
+  }, []); // เช็คเมื่อ component mount เท่านั้น
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,22 +35,24 @@ export default function Page() {
     setToken(result.token);
   };
 
-  if (Token) {
-    try {
-      if (typeof window !== "undefined") {
-        localStorage.setItem('token', Token);
-        router.push('/users');
+  useEffect(() => {
+    if (Token) {
+      try {
+        if (typeof window !== "undefined") {
+          localStorage.setItem('token', Token);
+          router.push('/users'); // เปลี่ยนหน้าเมื่อ Token ถูกตั้งค่าแล้ว
+        }
+      } catch (error) {
+        console.log('Error while setting token localstorage', error);
       }
-    } catch (error) {
-      console.log('Error while setting token localstorage', error);
     }
-  }
+  }, [Token]); // จะทำงานเมื่อ Token ถูกตั้งค่า
 
   return (
     <form className="row g-3" onSubmit={handleSubmit}>
       <div className="col-md-6">
         <label htmlFor="basic-url" className="form-label">
-          username
+          Username
         </label>
         <div className="input-group">
           <span className="input-group-text" id="basic-addon3">

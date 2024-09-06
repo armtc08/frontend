@@ -10,75 +10,92 @@ export default function Page() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("click success");
+    console.log("Form submitted");
 
-    const res = await fetch("https://backend-rho-mauve.vercel.app/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password
-      })
-    });
+    try {
+      const res = await fetch("https://backend-rho-mauve.vercel.app/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
 
-    const result = await res.json();
-    setToken(result.token);
+      if (!res.ok) {
+        throw new Error(`Error: ${res.status} ${res.statusText}`);
+      }
+
+      const result = await res.json();
+      setToken(result.token);
+      console.log("Login successful, token received:", result.token);
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
   };
 
-  if (Token) {
-    try {
-      if (typeof window !== "undefined") {
-        localStorage.setItem('token', Token);
-        router.push('/users');
+  // Use effect to handle redirection after receiving the token
+  React.useEffect(() => {
+    if (Token) {
+      try {
+        if (typeof window !== "undefined") {
+          localStorage.setItem("token", Token);
+          router.push("/users");
+        }
+      } catch (error) {
+        console.error("Error while setting token in local storage", error);
       }
-    } catch (error) {
-      console.log('Error while setting token localstorage', error);
     }
-  }
+  }, [Token, router]);
 
   return (
-    <form className="row g-3" onSubmit={handleSubmit}>
-      <div className="col-md-6">
-        <label htmlFor="basic-url" className="form-label">
-          Username
-        </label>
-        <div className="input-group">
-          <span className="input-group-text" id="basic-addon3">
-            <i className="bi bi-person-vcard"></i>
-          </span>
-          <input
-            type="text"
-            className="form-control"
-            value={username}
-            onChange={(e) => setUserName(e.target.value)}
-            required
-          />
+    <>
+      <h1>Sign In Page</h1>
+      <form className="row g-3" onSubmit={handleSubmit}>
+        <div className="col-md-6">
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
+          <div className="input-group">
+            <span className="input-group-text" id="basic-addon3">
+              <i className="bi bi-person-vcard"></i>
+            </span>
+            <input
+              type="text"
+              className="form-control"
+              id="username"
+              value={username}
+              onChange={(e) => setUserName(e.target.value)}
+              required
+            />
+          </div>
         </div>
-      </div>
-      <div className="col-md-6">
-        <label htmlFor="basic-url" className="form-label">
-          Password
-        </label>
-        <div className="input-group">
-          <span className="input-group-text" id="basic-addon3">
-            <i className="bi bi-person-vcard-fill"></i>
-          </span>
-          <input
-            type="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => setPassWord(e.target.value)}
-            required
-          />
+        <div className="col-md-6">
+          <label htmlFor="password" className="form-label">
+            Password
+          </label>
+          <div className="input-group">
+            <span className="input-group-text" id="basic-addon3">
+              <i className="bi bi-person-vcard-fill"></i>
+            </span>
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              value={password}
+              onChange={(e) => setPassWord(e.target.value)}
+              required
+            />
+          </div>
         </div>
-      </div>
-      <div className="col-12">
-        <button type="submit" className="btn btn-success">
-          <i className="bi bi-box-arrow-right"></i> Sign In
-        </button>
-      </div>
-    </form>
+        <div className="col-12">
+          <button type="submit" className="btn btn-success">
+            <i className="bi bi-box-arrow-right"></i> Sign In
+          </button>
+        </div>
+      </form>
+    </>
   );
 }

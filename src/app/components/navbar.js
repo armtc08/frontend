@@ -9,13 +9,13 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  const handleLogout = () => {
+  //const handleLogout = () => {
     // Remove token from localStorage
-    localStorage.removeItem('token');
-    setIsLoggedIn(false);
+    //localStorage.removeItem('token');
+    //setIsLoggedIn(false);
     // Redirect to the home page
-    router.push('/signin');
-  };
+    //router.push('/signin');
+  //};
 
   useEffect(() => {
     // Check for token in localStorage
@@ -105,7 +105,7 @@ export default function Navbar() {
                   </button>
                 </Link>
                 <Link href="/signin">
-                  <button type="button" className="btn btn-outline-success">
+                  <button type="button" className="btn btn-outline-cyan">
                     Sign In
                   </button>
                 </Link>

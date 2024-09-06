@@ -101,7 +101,7 @@ export default function Navbar() {
               <>
                 <Link href="/signup">
                   <button type="button" className="btn btn-outline-success me-2">
-                    Sign Ups
+                    Sign Up
                   </button>
                 </Link>
                 <Link href="/signin">

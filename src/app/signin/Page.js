@@ -1,6 +1,7 @@
 "use client";
+
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Page() {
   const [username, setUserName] = useState("");
@@ -8,9 +9,13 @@ export default function Page() {
   const [Token, setToken] = useState("");
   const router = useRouter();
 
+  useEffect(() => {
+    console.log("Page mounted");
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted");
+    console.log("Submit clicked");
 
     try {
       const res = await fetch("https://backend-rho-mauve.vercel.app/api/login", {
@@ -24,6 +29,8 @@ export default function Page() {
         }),
       });
 
+      console.log("API response:", res);
+      
       if (!res.ok) {
         throw new Error(`Error: ${res.status} ${res.statusText}`);
       }
@@ -36,8 +43,7 @@ export default function Page() {
     }
   };
 
-  // Use effect to handle redirection after receiving the token
-  React.useEffect(() => {
+  useEffect(() => {
     if (Token) {
       try {
         if (typeof window !== "undefined") {
